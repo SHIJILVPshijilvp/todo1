@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" style=background-color:white;>
+    <div class="row">
+        <div class="col md-12">
+            <div style=background-color:blue;width:100%;height:150px;margin-bottom:50px; class="banner" >
+                <div class="banner-text" style=top:75px;left:45%;position:absolute;transform:transform;>
+                    <h1>TODO</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="container" style=background-color:white;width:100%;>
+        <div class="row">
+            <div class="col-md-6"  style=background-color:white;>
+<form method="POST" class="p-3 shadow">
+    {% csrf_token %}
+
+    <div class="form-group">
+    <input type="text" class="form-control" name="task" placeholder="enter task name">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="priority" placeholder="enter priority">
+    </div>
+ <div class="form-group">
+        <input type="date" class="form-control" name="date" placeholder="enter date">
+    </div>
+<!--    <input type="submit" class="btn btn-success"  >-->
+    <button type="submit" class="btn btn-success"  >save</button>
+
+</form>
+
+
+
+        </div>
+
+            <div class="col-md-6" >
+                <h5 style="color:green" >Task to be completed</h5>
+                {% for i in task %}
+            <div class=" shadow card" style=margin-bottom:25px;background-color:white>
+  <div class="card-body">
+    <h5 class="card-title">{{i.name}}</h5>
+    <p class="card-text">{{i.priority}}</p>
+      <p class="card-text">{{i.date}}</p>
+    <button class="btn btn-danger" href="{% url 'delete' i.id %}">done</button>
+       <button class="btn btn-success" href="{% url 'update' i.id %}">update</button>
+  </div>
+</div>
+                {% endfor %}
+    </div>
+            </div>
+</div>
+{% endblock %}
